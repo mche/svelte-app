@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="me z-depth-3">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="me z-depth-3" style="{OptionsStyle()}">
 
   <path d="m160 144-6.978-76.756a16 16 0 0 1 9.229-15.976l87.61-40.435a16 16 0 0 1 12.449-.406l86.49 33.266a16 16 0 0 1 10.2 16.263l-7 84.044v16h-192z" fill="#3a1e13"/>
   <path d="m504 512v-33.805l-56-126.195h-384l-56 120v40z" fill="#cce9ea"/>
@@ -29,6 +29,7 @@
 </svg>
 
 <script>
+  export let options;
   $: tick = '';
   const Tick = function(){
     new Promise(resolve => setTimeout(resolve, 100)).then(()=>{ tick = 'on'; });
@@ -37,7 +38,15 @@
       Tick();
     }, Math.random()*10000);
   
-  }
+  };
+  const OptionsStyle = () => {
+    if (!options.style) return '';
+    let style = '';
+    for (let prop in options.style) {
+      style += `${prop}: ${options.style[prop]};`;
+    }
+    return style;
+  };
   Tick();
 </script>
 
